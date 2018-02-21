@@ -1,8 +1,8 @@
 version: "3"
 services:
   php:
-    image: php:7.0
-    entrypoint: ["php", "/var/www/public/index.php", "rabbitmq", "setup-fabric"]
+    build: docker/php
+    entrypoint: ["php", "/var/www/public/index.php", "rabbitmq", "consumer", "rabbitmq_app_consumer"]
     volumes:
       - ./:/var/www/
     depends_on:

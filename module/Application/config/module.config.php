@@ -7,7 +7,7 @@
 
 namespace Application;
 
-use Application\Consumer\NullConsumer;
+use Application\Consumer\EchoAndRejectConsumer;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -60,7 +60,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            NullConsumer::class => InvokableFactory::class
+            EchoAndRejectConsumer::class => InvokableFactory::class
         ]
     ]
 ];

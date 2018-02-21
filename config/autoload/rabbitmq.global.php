@@ -11,7 +11,7 @@
  * file.
  */
 
-use Application\Consumer\NullConsumer;
+use Application\Consumer\EchoAndRejectConsumer;
 
 return [
     'rabbitmq' => [
@@ -92,7 +92,7 @@ return [
                     'prefetch_count' => 1,
                     'global' => false
                 ],
-                'callback' => NullConsumer::class,
+                'callback' => EchoAndRejectConsumer::class,
             ]
         ]
     ]
