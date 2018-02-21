@@ -1,4 +1,5 @@
 <?php
+sleep(5);
 
 use Zend\Mvc\Application;
 use Zend\Stdlib\ArrayUtils;

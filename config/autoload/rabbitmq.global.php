@@ -54,7 +54,9 @@ return [
                     'auto_delete' => false, // (default)
                     'exclusive' => false,   // (default)
                     'no_wait' => false,     // (default)
-                    'arguments' => [],      // (default)
+                    'arguments' => [
+                        'x-dead-letter-exchange' => ['S', 'dead-letter-exchange']
+                    ],      // (default)
                     'ticket' => 0,          // (default)
                     'routing_keys' => []    // (default)
                 ],
@@ -71,9 +73,17 @@ return [
                 ],
                 'queue' => [
                     'name' => 'rabbitmq-app-queue', // can be an empty string,
-                    'routing_keys' => [
-                        // optional routing keys
-                    ]
+                    'type' => null,         // (default)
+                    'passive' => false,     // (default)
+                    'durable' => true,      // (default)
+                    'auto_delete' => false, // (default)
+                    'exclusive' => false,   // (default)
+                    'no_wait' => false,     // (default)
+                    'arguments' => [
+                        'x-dead-letter-exchange' => ['S', 'dead-letter-exchange']
+                    ],      // (default)
+                    'ticket' => 0,          // (default)
+                    'routing_keys' => []    // (default)
                 ],
                 'auto_setup_fabric_enabled' => true, // auto-setup exchanges and queues
                 'qos' => [
