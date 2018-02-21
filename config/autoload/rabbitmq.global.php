@@ -37,28 +37,6 @@ return [
                 'exchange' => [
                     'type' => 'direct',
                     'name' => 'rabbitmq-app-exchange',
-                    'durable' => true,      // (default)
-                    'auto_delete' => false, // (default)
-                    'internal' => false,    // (default)
-                    'no_wait' => false,     // (default)
-                    'declare' => true,      // (default)
-                    'arguments' => [],      // (default)
-                    'ticket' => 0,          // (default)
-                    'exchange_binds' => []  // (default)
-                ],
-                'queue' => [ // optional queue
-                    'name' => 'rabbitmq-app-queue', // can be an empty string,
-                    'type' => null,         // (default)
-                    'passive' => false,     // (default)
-                    'durable' => true,      // (default)
-                    'auto_delete' => false, // (default)
-                    'exclusive' => false,   // (default)
-                    'no_wait' => false,     // (default)
-                    'arguments' => [
-                        'x-dead-letter-exchange' => ['S', 'dead-letter-exchange']
-                    ],      // (default)
-                    'ticket' => 0,          // (default)
-                    'routing_keys' => []    // (default)
                 ],
                 'auto_setup_fabric_enabled' => true // auto-setup exchanges and queues
             ]
@@ -73,17 +51,29 @@ return [
                 ],
                 'queue' => [
                     'name' => 'rabbitmq-app-queue', // can be an empty string,
-                    'type' => null,         // (default)
-                    'passive' => false,     // (default)
-                    'durable' => true,      // (default)
-                    'auto_delete' => false, // (default)
-                    'exclusive' => false,   // (default)
-                    'no_wait' => false,     // (default)
                     'arguments' => [
                         'x-dead-letter-exchange' => ['S', 'dead-letter-exchange']
-                    ],      // (default)
-                    'ticket' => 0,          // (default)
-                    'routing_keys' => []    // (default)
+                    ],
+                ],
+                'auto_setup_fabric_enabled' => true, // auto-setup exchanges and queues
+                'qos' => [
+                    // optional QOS options for RabbitMQ
+                    'prefetch_size' => 0,
+                    'prefetch_count' => 1,
+                    'global' => false
+                ],
+                'callback' => EchoAndRejectConsumer::class,
+            ],
+
+            'deadletter' => [
+                'description' => 'Dummy consumer to setup dead lettering',
+                'connection' => 'default', // the connection name
+                'exchange' => [
+                    'type' => 'fanout',
+                    'name' => 'dead-letter-exchange'
+                ],
+                'queue' => [
+                    'name' => 'dead-letter-queue', // can be an empty string,
                 ],
                 'auto_setup_fabric_enabled' => true, // auto-setup exchanges and queues
                 'qos' => [
