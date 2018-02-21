@@ -1,7 +1,14 @@
-zf:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+version: "3"
+services:
+  php:
+    image: php:7.0
+    entrypoint: ["php", "/var/www/public/index.php", "rabbitmq", "setup-fabric"]
+    volumes:
+      - ./:/var/www/
+    links:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
