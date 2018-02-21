@@ -11,7 +11,10 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Mvc\Console',
+    'Zend\Serializer',
     'Zend\Router',
     'Zend\Validator',
+    'RabbitMqModule',
     'Application',
 ];
